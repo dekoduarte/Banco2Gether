@@ -1,27 +1,19 @@
 package br.com.banco2gether.usuarios;
 
 import br.com.banco2gether.agencias.Agencia;
+import br.com.banco2gether.contas.Conta;
+import br.com.banco2gether.usuarios.exception.ErrosLoginException;
 
 public class Gerente extends Funcionario {
 	
-	private Agencia agencia;
-
+	Agencia agencia;
+	
 	@Override
-	public void sacar() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void autenticar(String senha, String cpf) {
+		if (!this.getCpf().equals(cpf) || !this.getSenha().equals(senha)) {
+			throw new ErrosLoginException("Login ou senha inválidos");
+		}
 
-	@Override
-	public void depositar() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void transferir() {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

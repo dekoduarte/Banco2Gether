@@ -1,44 +1,14 @@
 package br.com.banco2gether.usuarios;
 
-import br.com.banco2gether.operacoes.OperacaoBancaria;
-import br.com.banco2gether.relatorios.IRelatorioGeral;
+import br.com.banco2gether.usuarios.exception.ErrosLoginException;
 
-public class Cliente extends Usuario  implements OperacaoBancaria, IRelatorioGeral  {
-
-	@Override
-	public void sacar() {
-		// TODO Auto-generated method stub
-		
-	}
+public class Cliente extends Usuario implements Autenticavel {
 
 	@Override
-	public void depositar() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void autenticar(String senha, String cpf) {
+		if (!this.getCpf().equals(cpf) || !this.getSenha().equals(senha)) {
+			throw new ErrosLoginException("Login ou senha inválidos");
+		}
 
-	@Override
-	public void transferir() {
-		// TODO Auto-generated method stub
-		
 	}
-
-	@Override
-	public void relatorioSaldo() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void relatorioTributacaoContaCorrente() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void relatorioRendimentoPoupanca() {
-		// TODO Auto-generated method stub
-		
-	}
-
 }
