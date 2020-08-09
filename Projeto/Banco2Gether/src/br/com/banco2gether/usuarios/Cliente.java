@@ -9,6 +9,5 @@ public class Cliente extends Usuario implements Autenticavel {
 		if (!this.getCpf().equals(cpf) || !this.getSenha().equals(senha)) {
 			throw new ErrosLoginException("Login ou senha inválidos");
 		}
-
 	}
 }
