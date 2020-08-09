@@ -7,7 +7,7 @@ import br.com.banco2gether.util.Sistema;
 public class SistemaInterno {
 	public static void main(String[] args) {
 
-	
+	//Teste commit
 		
 	
 	}
