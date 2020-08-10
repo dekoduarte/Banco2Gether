@@ -30,24 +30,7 @@ public class SistemaInterno {
 		Sistema.login(gerente1, "41404123423", "123");
 		
 		System.out.println(gerente1.getTotalContasNaAgencia());
-		System.out.println(gerente1.getCargo());
-		
-//		try {
-//			IOFiles.readFile();
-//		} catch (IOException e) {
-//			throw new RuntimeException(e.getMessage());
-//		}
-		
-		try {
-			IOFiles.createTextFile(Cargos.Diretor);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOFilesException e)
-		{
-			System.out.println(e.getMessage());
-		}
-		
+		System.out.println(gerente1.getCargo());		
 	
 	}
 	
