@@ -30,7 +30,7 @@ public class SistemaInterno {
 		Sistema.login(gerente1, "41404123423", "123");
 		
 		System.out.println(gerente1.getTotalContasNaAgencia());
-		System.out.println(gerente1.getCargo());		
+		System.out.println(gerente1.getCargo());
 	
 	}
 	
