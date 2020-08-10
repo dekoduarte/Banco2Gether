@@ -8,10 +8,9 @@ public final class Sistema {
 	public static void login(Autenticavel usuario, String cpf, String senha )
 	{
 		try {
-			usuario.autenticar(senha, cpf);
+			usuario.autenticar(cpf, senha);
 		} catch (ErrosLoginException e) {
 			System.out.println(e.getMessage());
 		}
-		
 	}
 }
