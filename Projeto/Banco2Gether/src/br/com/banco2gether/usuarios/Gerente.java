@@ -13,9 +13,16 @@ public class Gerente extends Funcionario{
 		this.agencia = agencia;
 		this.cargo = Cargos.Gerente;
 	}
+	
+	// Relatorio de número de contas na agencia,
+	// atravez do metodo getNumeroContas que vem de agencia.
+	public int getTotalContasNaAgencia()
+	{
+		return this.agencia.getNumeroContas();
+	}
 
 	@Override
-	public void autenticar(String senha, String cpf) {
+	public void autenticar(String cpf, String senha) {
 		if (!this.getCpf().equals(cpf) || !this.getSenha().equals(senha)) {
 			throw new ErrosLoginException("Login ou senha inválidos");
 		}

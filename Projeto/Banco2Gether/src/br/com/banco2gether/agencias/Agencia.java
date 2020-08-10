@@ -15,4 +15,8 @@ public class Agencia {
 		this.numero = numero;
 		this.contas = contas;
 	}
+	
+	public int getNumeroContas() {
+		return this.contas.size();
+	}
 }
