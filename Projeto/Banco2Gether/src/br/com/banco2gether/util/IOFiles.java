@@ -25,7 +25,7 @@ public final class IOFiles {
 	public static final String CABECALHO_OPERACOES_BANCARIAS = "OPERACAO,TITULAR,VALOR,IMPOSTO,DATA";
 	public static final String FILE_EXTENSION = "csv";
 
-	public static String openFileSystem() {
+	public static String abrirCaminhoDoArquivo() {
 
 		try {
 
@@ -49,7 +49,7 @@ public final class IOFiles {
 		return "";
 	}
 
-	public static String createTextFile(Cargos cargo) throws IOException {
+	public static String criarArquivo(Cargos cargo) throws IOException {
 	
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 		Date date = new Date();
@@ -61,7 +61,7 @@ public final class IOFiles {
 			throw new IOFilesException("Erro ao criar o arquivo de texto.");
 	}
 
-	public static void readFile(String path) throws IOException {
+	public static void leituraArquivo(String path) throws IOException {
 
 		BufferedReader buffRead = new BufferedReader(new FileReader(path));
 		String linha = "";
@@ -77,7 +77,7 @@ public final class IOFiles {
 		buffRead.close();
 	}
 
-	public static void escreveOperacaoBancaria(Conta conta, TipoOperacao operacao) throws IOException {
+	public static void escreveArquivoOperacaoBancaria(Conta conta, TipoOperacao operacao) throws IOException {
 		
 		String path = PATH_RELATORIOS + "OperacaoBancaria.csv";
 		
