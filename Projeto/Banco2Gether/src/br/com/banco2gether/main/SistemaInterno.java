@@ -29,4 +29,8 @@ public class SistemaInterno {
 		System.out.println(gerente1.getTotalContasNaAgencia());
 		System.out.println(gerente1.getCargo());
 	}
+<<<<<<< Updated upstream
+=======
+		
+>>>>>>> Stashed changes
 }
