@@ -31,6 +31,10 @@ public class SistemaInterno {
 		
 		System.out.println(gerente1.getTotalContasNaAgencia());
 		System.out.println(gerente1.getCargo());
+		
+		ContaCorrente cc = new ContaCorrente();
+		
+		
 	
 	}
 	
