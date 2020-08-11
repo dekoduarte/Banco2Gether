@@ -48,11 +48,11 @@ public final class IOFiles {
 	}
 
 	public static String createTextFile(Cargos cargo) throws IOException {
-
+	
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 		Date date = new Date();
-		File file = new File(PATH_RELATORIOS + cargo.toString().trim() + formatter.format(date).trim() + FILE_EXTENSION);
-
+		File file = new File(cargo.toString().trim() + formatter.format(date).trim() + FILE_EXTENSION);
+	
 		if (file.createNewFile()) {
 			return file.getName();
 		} else
