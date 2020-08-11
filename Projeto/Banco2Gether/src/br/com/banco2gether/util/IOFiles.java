@@ -14,14 +14,16 @@ import java.util.Scanner;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import br.com.banco2gether.contas.Conta;
+import br.com.banco2gether.operacoes.TipoOperacao;
 import br.com.banco2gether.usuarios.Cargos;
 import br.com.banco2gether.usuarios.exception.IOFilesException;
 
 public final class IOFiles {
 
 	public static final String PATH_RELATORIOS = "../Banco2Gether/src/br/com/banco2gether/arquivos/";
-
-	public static final String FILE_EXTENSION = System.getProperty("os.name").indexOf("win") >= 0 ? ".txt" : ".text";
+	public static final String CABECALHO_OPERACOES_BANCARIAS = "OPERACAO,TITULAR,VALOR,IMPOSTO,DATA";
+	public static final String FILE_EXTENSION = "csv";
 
 	public static String openFileSystem() {
 
@@ -75,13 +77,34 @@ public final class IOFiles {
 		buffRead.close();
 	}
 
-	public static void writeFile(String path) throws IOException {
+	public static void escreveOperacaoBancaria(Conta conta, TipoOperacao operacao) throws IOException {
+		
+		String path = PATH_RELATORIOS + "OperacaoBancaria.csv";
+		
+		BufferedReader buffRead = new BufferedReader(new FileReader(path));
 		BufferedWriter buffWrite = new BufferedWriter(new FileWriter(path));
-		String linha = "";
-		Scanner in = new Scanner(System.in);
-		System.out.println("Escreva algo: ");
-		linha = in.nextLine();
-		buffWrite.append(linha + "\n");
+		
+		StringBuilder linha = new StringBuilder();
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+		Date date = new Date();
+		
+		
+		if(buffRead.readLine() == null)
+		{
+			buffWrite.write(CABECALHO_OPERACOES_BANCARIAS);
+			buffWrite.newLine();
+		}
+		
+		buffWrite.close();
+		
+		linha.append(operacao.toString().trim());
+		linha.append(",Conta.titular");
+		linha.append(",Conta.valor");
+		linha.append(",Conta.imposto");
+		linha.append("," + formatter.format(date));
+		
+		buffWrite.append(linha);
+		buffWrite.newLine();
 		buffWrite.close();
 	}
 

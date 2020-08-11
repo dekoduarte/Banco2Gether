@@ -7,6 +7,7 @@ import java.util.List;
 import br.com.banco2gether.agencias.Agencia;
 import br.com.banco2gether.contas.Conta;
 import br.com.banco2gether.contas.ContaCorrente;
+import br.com.banco2gether.operacoes.TipoOperacao;
 import br.com.banco2gether.usuarios.*;
 import br.com.banco2gether.usuarios.exception.IOFilesException;
 import br.com.banco2gether.util.IOFiles;
@@ -32,6 +33,13 @@ public class SistemaInterno {
 		System.out.println(gerente1.getTotalContasNaAgencia());
 		System.out.println(gerente1.getCargo());
 		 
+		
+		try {
+			IOFiles.escreveOperacaoBancaria(new ContaCorrente(), TipoOperacao.Saque);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }
