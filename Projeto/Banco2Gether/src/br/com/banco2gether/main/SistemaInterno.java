@@ -27,11 +27,11 @@ public class SistemaInterno {
 		
 		gerente1.setSenha("123");
 		gerente1.setCpf("41404123423");
-		Sistema.login(gerente1, "41404123423", "123");
+		Sistema.login(gerente1, "41404123423", "1234");
 		
 		System.out.println(gerente1.getTotalContasNaAgencia());
 		System.out.println(gerente1.getCargo());
-	
+		 
 	}
 	
 }
