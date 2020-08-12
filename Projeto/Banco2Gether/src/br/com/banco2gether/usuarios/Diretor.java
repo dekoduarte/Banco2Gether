@@ -5,7 +5,14 @@ import java.util.List;
 import br.com.banco2gether.relatorios.IRelatorioDiretoria;
 import br.com.banco2gether.usuarios.exception.ErrosLoginException;
 
-public class Diretor extends Funcionario implements IRelatorioDiretoria{
+public class Diretor extends Funcionario implements IRelatorioDiretoria {
+
+	public Diretor(String nome, String cpf, String senha) {
+		this.setNome(nome);
+		this.setCpf(cpf);
+		this.setSenha(senha);
+		this.setCargo(Cargos.Diretor);
+	}
 
 	@Override
 	public void autenticar(String senha, String cpf) {
@@ -18,6 +25,6 @@ public class Diretor extends Funcionario implements IRelatorioDiretoria{
 	@Override
 	public void relatorioClientesDoBanco(List<Cliente> contas) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }
