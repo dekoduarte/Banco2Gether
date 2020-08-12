@@ -5,11 +5,17 @@ import br.com.banco2gether.usuarios.exception.ErrosLoginException;
 
 public class Cliente extends Usuario implements Autenticavel {
 
-	SeguroDeVida seguroDeVida;
+	private SeguroDeVida seguroDeVida;
 	
-
+	public Cliente(String nome, String cpf, String senha)
+	{
+		this.setNome(nome);
+		this.setCpf(cpf);
+		this.setSenha(senha);
+	}
+	
 	@Override
-	public void autenticar(String senha, String cpf) {
+	public void autenticar(String cpf, String senha) {
 		if (!this.getCpf().equals(cpf) || !this.getSenha().equals(senha)) {
 			throw new ErrosLoginException("Login ou senha inválidos");
 		}

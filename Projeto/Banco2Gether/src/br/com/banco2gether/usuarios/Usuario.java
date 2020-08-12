@@ -1,10 +1,12 @@
 package br.com.banco2gether.usuarios;
 
+import br.com.banco2gether.contas.Conta;
+
 public abstract class Usuario {
 	private String nome;
 	private String cpf;
 	private String senha;
-	private double valor;
+	private Conta conta;
 	
 	
 	public String getNome() {
@@ -25,12 +27,15 @@ public abstract class Usuario {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	public double getValor() {
-		return valor;
+	
+	public Conta getConta() {
+		return this.conta;
 	}
-	public void setValor(double valor) {
-		this.valor = valor;
+	public void setConta(Conta conta) {
+		this.conta = conta;
 	}
+	
+	
 	
 	
 }
