@@ -80,34 +80,33 @@ public final class IOFiles {
 		}
 		buffRead.close();
 	}
-
-<<<<<<< HEAD
-	public static void escreveArquivoOperacaoBancaria(String titular, double quantia_operacao, double quantia_imposto,
-			TipoOperacao operacao) throws IOException {
-
-		String path = PATH_RELATORIOS + "OperacaoBancaria.csv";
-=======
+	
 	public static double leituraDeCapitalDoBanco() throws IOException {
-		String path = PATH_RELATORIOS + "OperacaoBancaria.csv";
-		BufferedReader buffRead = new BufferedReader(new FileReader(path));
 
-		String row;
-		double total = 0;
-		
-		buffRead.readLine();
-		while ((row = buffRead.readLine()) != null) {
-			String[] data = row.split(",");
-			total += Double.parseDouble(data[3]);
+		 String path = PATH_RELATORIOS + "OperacaoBancaria.csv";
+		 BufferedReader buffRead = new BufferedReader(new FileReader(path));
+
+		 String row;
+
+		 double total = 0;
+
+		 buffRead.readLine();
+
+		 while ((row = buffRead.readLine()) != null) {
+		 String[] data = row.split(",");
+		 total += Double.parseDouble(data[3]);
+
 		}
 
-		return total;
-	}
+		 return total;
+
+		}
 
 	public static void escreveArquivoOperacaoBancaria(String titular, double quantia_operacao, double quantia_imposto,
 			TipoOperacao operacao) throws IOException {
 
 		String path = PATH_RELATORIOS + "OperacaoBancaria.csv";
->>>>>>> master
+
 
 		File f = new File(path);
 		if (!f.exists()) {
