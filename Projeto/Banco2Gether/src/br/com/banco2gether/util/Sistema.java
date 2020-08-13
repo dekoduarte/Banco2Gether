@@ -28,7 +28,7 @@ public final class Sistema {
 		List<ListaModeloGeral> usuarios = recuperaUsuariosDoSistema();
 
 		for (ListaModeloGeral u : usuarios) {
-			if (u.cpf.equals(cpf) && u.senha.equals(senha)) {
+			if (u.cpf == cpf && u.senha == senha) {
 
 				if (u.tipo_usuario.equalsIgnoreCase("Cliente")) {
 
