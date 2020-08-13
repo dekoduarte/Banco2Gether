@@ -8,7 +8,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 import javax.swing.JFileChooser;
@@ -17,6 +19,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import br.com.banco2gether.contas.Conta;
 import br.com.banco2gether.operacoes.TipoOperacao;
 import br.com.banco2gether.usuarios.Cargos;
+import br.com.banco2gether.usuarios.Usuario;
 import br.com.banco2gether.usuarios.exception.IOFilesException;
 
 public final class IOFiles {
@@ -50,11 +53,11 @@ public final class IOFiles {
 	}
 
 	public static String criarArquivo(Cargos cargo) throws IOException {
-	
+
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 		Date date = new Date();
 		File file = new File(cargo.toString().trim() + formatter.format(date).trim() + FILE_EXTENSION);
-	
+
 		if (file.createNewFile()) {
 			return file.getName();
 		} else
@@ -77,40 +80,62 @@ public final class IOFiles {
 		buffRead.close();
 	}
 
-	public static void escreveArquivoOperacaoBancaria(String titular,double quantia_operacao, double quantia_imposto, TipoOperacao operacao) throws IOException {
-		
+	public static void escreveArquivoOperacaoBancaria(String titular, double quantia_operacao, double quantia_imposto,
+			TipoOperacao operacao) throws IOException {
+
 		String path = PATH_RELATORIOS + "OperacaoBancaria.csv";
-		
+
 		File f = new File(path);
-	    if (!f.exists()){
-	        f.createNewFile();
-	    }
-		
+		if (!f.exists()) {
+			f.createNewFile();
+		}
+
 		BufferedReader buffRead = new BufferedReader(new FileReader(path));
 		BufferedWriter buffWrite = new BufferedWriter(new FileWriter(path, true));
-		
+
 		StringBuilder linha = new StringBuilder();
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 		Date date = new Date();
-		
-		if(buffRead.readLine() == null)
-		{
+
+		if (buffRead.readLine() == null) {
 			buffWrite.write(CABECALHO_OPERACOES_BANCARIAS);
 			buffWrite.newLine();
 		}
-		
+
 		buffRead.close();
-		
+
 		linha.append(operacao.toString().trim());
 		linha.append("," + titular);
 		linha.append("," + quantia_operacao);
 		linha.append("," + quantia_imposto);
 		linha.append("," + formatter.format(date));
-		
+
 		buffWrite.append(linha);
 		buffWrite.newLine();
 		buffWrite.flush();
 		buffWrite.close();
+	}
+
+	public static List<ListaModeloGeral> ListaDados() throws IOException {
+
+		String linha;
+		String path = PATH_RELATORIOS + "Usuario.csv";
+		List<ListaModeloGeral> lista = new ArrayList<>();
+		BufferedReader csvReader = new BufferedReader(new FileReader(path));
+		linha = csvReader.readLine();
+
+		while ((linha = csvReader.readLine()) != null) {
+			String[] data = linha.split(",");
+
+			lista.add(new ListaModeloGeral(data[0], data[1], data[2], data[3], data[4], Integer.parseInt(data[5]),
+					Double.parseDouble(data[6]), Integer.parseInt(data[7])));
+
+		}
+
+		csvReader.close();
+
+		return lista;
+
 	}
 
 }
