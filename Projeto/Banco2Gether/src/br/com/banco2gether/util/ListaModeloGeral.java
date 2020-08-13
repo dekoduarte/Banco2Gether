@@ -1,8 +1,8 @@
 package br.com.banco2gether.util;
 
 public class ListaModeloGeral {
-	String nome;
-	String cpf;
+	public String nome;
+	public String cpf;
 	String senha;
 	String tipo_usuario;
 	String tipo_conta;

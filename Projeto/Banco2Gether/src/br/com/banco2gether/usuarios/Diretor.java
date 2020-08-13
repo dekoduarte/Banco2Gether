@@ -4,6 +4,8 @@ import java.util.List;
 
 import br.com.banco2gether.relatorios.IRelatorioDiretoria;
 import br.com.banco2gether.usuarios.exception.ErrosLoginException;
+import br.com.banco2gether.util.DadosPopulados;
+import br.com.banco2gether.util.ListaModeloGeral;
 
 public class Diretor extends Funcionario implements IRelatorioDiretoria {
 
@@ -15,7 +17,7 @@ public class Diretor extends Funcionario implements IRelatorioDiretoria {
 	}
 
 	@Override
-	public void autenticar(String senha, String cpf) {
+	public void autenticar(String cpf, String senha) {
 		if (!this.getCpf().equals(cpf) || !this.getSenha().equals(senha)) {
 			throw new ErrosLoginException("Login ou senha inválidos");
 		}
@@ -23,8 +25,13 @@ public class Diretor extends Funcionario implements IRelatorioDiretoria {
 	}
 
 	@Override
-	public void relatorioClientesDoBanco(List<Cliente> contas) {
-		// TODO Auto-generated method stub
-
+	public void relatorioClientesDoBanco() {
+		DadosPopulados dados = new DadosPopulados();
+		
+		List<ListaModeloGeral> lista = dados.getLista();
+		
+		lista.stream()
+		.map(c -> "Nome: " + c.nome + ", CPF: " + c.cpf + ", Agencia: " + c.numero_agencia )
+		.forEach(System.out::println);
 	}
 }

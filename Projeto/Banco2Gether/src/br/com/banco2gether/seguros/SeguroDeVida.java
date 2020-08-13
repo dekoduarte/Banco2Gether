@@ -1,5 +1,6 @@
 package br.com.banco2gether.seguros;
 
+import br.com.banco2gether.contas.Conta;
 import br.com.banco2gether.usuarios.Usuario;
 
 public class SeguroDeVida implements Tributavel {
@@ -14,7 +15,8 @@ public class SeguroDeVida implements Tributavel {
 	
 	@Override
 	public double getValorImposto() {
-		return this.valor * this.tributoSeguroDeVida;
+		double total = this.valor * this.tributoSeguroDeVida;
+		return total;
 	}
 	
 	public double getTributoSeguroDeVida()
