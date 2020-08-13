@@ -142,6 +142,8 @@ public final class Sistema {
 					return presidente;
 				}
 			}
+			else
+				throw new ErrosLoginException("Usuario nao existe.");
 
 		}
 		return null;
@@ -164,17 +166,17 @@ public final class Sistema {
 
 	public static List<ListaModeloGeral> recuperaUsuariosDoSistema() {
 		// Dados staticos
-//		DadosPopulados dados = new DadosPopulados();
+		DadosPopulados dados = new DadosPopulados();
 
-//		Dados do arquivo
-		List<ListaModeloGeral> lista = new ArrayList<>();
-		try {
-			lista = IOFiles.ListaDados();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
-		return lista;
+//		List<ListaModeloGeral> lista = new ArrayList<>();
+//		try {
+//			lista = IOFiles.ListaDados();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+
+		return dados.getLista();
 	}
 }

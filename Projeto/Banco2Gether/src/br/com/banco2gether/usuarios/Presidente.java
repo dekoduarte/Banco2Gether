@@ -29,13 +29,15 @@ public class Presidente extends Funcionario implements IRelatorioDiretoria, IRel
 	}
 
 	@Override
-	public void relatorioClientesDoBanco() {
+	public void relatorioClientesDoBanco() throws IOException {
 		DadosPopulados dados = new DadosPopulados();
 
 		List<ListaModeloGeral> lista = dados.getLista();
 
 		lista.stream().map(c -> "Nome: " + c.nome + ", CPF: " + c.cpf + ", Agencia: " + c.numero_agencia)
 				.forEach(System.out::println);
+		
+		IOFiles.escreveRelatorioClientesDoBanco(Cargos.Diretor);
 	}
 
 	@Override
