@@ -142,9 +142,6 @@ public final class Sistema {
 					return presidente;
 				}
 			}
-			else
-				throw new ErrosLoginException("Usuario nao existe.");
-
 		}
 		return null;
 	}

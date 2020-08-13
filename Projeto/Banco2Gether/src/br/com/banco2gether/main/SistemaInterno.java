@@ -12,7 +12,7 @@ class SistemaInterno {
 	public static void main(String[] args) {
 		DadosPopulados dados = new DadosPopulados();
 
-		Usuario usuarioLogado = Sistema.login("2222", "1234");
+		Usuario usuarioLogado = Sistema.login("1111", "1234");
 
 		if (usuarioLogado != null)
 			if (usuarioLogado instanceof Cliente) {
