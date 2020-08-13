@@ -9,7 +9,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 import javax.swing.JFileChooser;
@@ -18,6 +20,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import br.com.banco2gether.contas.Conta;
 import br.com.banco2gether.operacoes.TipoOperacao;
 import br.com.banco2gether.usuarios.Cargos;
+import br.com.banco2gether.usuarios.Usuario;
 import br.com.banco2gether.usuarios.exception.IOFilesException;
 
 public final class IOFiles {
@@ -77,27 +80,33 @@ public final class IOFiles {
 		}
 		buffRead.close();
 	}
-
+	
 	public static double leituraDeCapitalDoBanco() throws IOException {
-		String path = PATH_RELATORIOS + "OperacaoBancaria.csv";
-		BufferedReader buffRead = new BufferedReader(new FileReader(path));
 
-		String row;
-		double total = 0;
-		
-		buffRead.readLine();
-		while ((row = buffRead.readLine()) != null) {
-			String[] data = row.split(",");
-			total += Double.parseDouble(data[3]);
+		 String path = PATH_RELATORIOS + "OperacaoBancaria.csv";
+		 BufferedReader buffRead = new BufferedReader(new FileReader(path));
+
+		 String row;
+
+		 double total = 0;
+
+		 buffRead.readLine();
+
+		 while ((row = buffRead.readLine()) != null) {
+		 String[] data = row.split(",");
+		 total += Double.parseDouble(data[3]);
+
 		}
 
-		return total;
-	}
+		 return total;
+
+		}
 
 	public static void escreveArquivoOperacaoBancaria(String titular, double quantia_operacao, double quantia_imposto,
 			TipoOperacao operacao) throws IOException {
 
 		String path = PATH_RELATORIOS + "OperacaoBancaria.csv";
+
 
 		File f = new File(path);
 		if (!f.exists()) {
@@ -128,6 +137,28 @@ public final class IOFiles {
 		buffWrite.newLine();
 		buffWrite.flush();
 		buffWrite.close();
+	}
+
+	public static List<ListaModeloGeral> ListaDados() throws IOException {
+
+		String linha;
+		String path = PATH_RELATORIOS + "Usuario.csv";
+		List<ListaModeloGeral> lista = new ArrayList<>();
+		BufferedReader csvReader = new BufferedReader(new FileReader(path));
+		linha = csvReader.readLine();
+
+		while ((linha = csvReader.readLine()) != null) {
+			String[] data = linha.split(",");
+
+			lista.add(new ListaModeloGeral(data[0], data[1], data[2], data[3], data[4], Integer.parseInt(data[5]),
+					Double.parseDouble(data[6]), Integer.parseInt(data[7])));
+
+		}
+
+		csvReader.close();
+
+		return lista;
+
 	}
 
 }
