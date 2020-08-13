@@ -9,7 +9,7 @@ class SistemaInterno {
 	public static void main(String[] args) {
 		DadosPopulados dados = new DadosPopulados();
         
-		Usuario usuarioLogado = Sistema.login("2222", "1234");
+		Usuario usuarioLogado = Sistema.login("4444", "1234");
 
 		if (usuarioLogado != null)
 			if (usuarioLogado instanceof Cliente) {
@@ -25,6 +25,18 @@ class SistemaInterno {
 				Gerente gerente = (Gerente) usuarioLogado;
 				
 				System.out.println(gerente.relatorioContasPorAgencia(gerente.getNumeroAgencia()));
+			}
+			else if(usuarioLogado instanceof Diretor)
+			{
+				Diretor diretor = (Diretor) usuarioLogado;
+				
+				diretor.relatorioClientesDoBanco();
+			}
+			else if(usuarioLogado instanceof Presidente)
+			{
+				Presidente presidente = (Presidente) usuarioLogado;
+				
+				System.out.println(presidente.relatorioTotalCapitalDoBanco());
 			}
 	}
 

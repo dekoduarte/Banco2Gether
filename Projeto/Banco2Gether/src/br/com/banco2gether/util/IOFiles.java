@@ -4,6 +4,7 @@ import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -50,11 +51,11 @@ public final class IOFiles {
 	}
 
 	public static String criarArquivo(Cargos cargo) throws IOException {
-	
+
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 		Date date = new Date();
 		File file = new File(cargo.toString().trim() + formatter.format(date).trim() + FILE_EXTENSION);
-	
+
 		if (file.createNewFile()) {
 			return file.getName();
 		} else
@@ -77,36 +78,52 @@ public final class IOFiles {
 		buffRead.close();
 	}
 
-	public static void escreveArquivoOperacaoBancaria(String titular,double quantia_operacao, double quantia_imposto, TipoOperacao operacao) throws IOException {
-		
+	public static double leituraDeCapitalDoBanco() throws IOException {
 		String path = PATH_RELATORIOS + "OperacaoBancaria.csv";
+		BufferedReader buffRead = new BufferedReader(new FileReader(path));
+
+		String row;
+		double total = 0;
 		
+		buffRead.readLine();
+		while ((row = buffRead.readLine()) != null) {
+			String[] data = row.split(",");
+			total += Double.parseDouble(data[3]);
+		}
+
+		return total;
+	}
+
+	public static void escreveArquivoOperacaoBancaria(String titular, double quantia_operacao, double quantia_imposto,
+			TipoOperacao operacao) throws IOException {
+
+		String path = PATH_RELATORIOS + "OperacaoBancaria.csv";
+
 		File f = new File(path);
-	    if (!f.exists()){
-	        f.createNewFile();
-	    }
-		
+		if (!f.exists()) {
+			f.createNewFile();
+		}
+
 		BufferedReader buffRead = new BufferedReader(new FileReader(path));
 		BufferedWriter buffWrite = new BufferedWriter(new FileWriter(path, true));
-		
+
 		StringBuilder linha = new StringBuilder();
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 		Date date = new Date();
-		
-		if(buffRead.readLine() == null)
-		{
+
+		if (buffRead.readLine() == null) {
 			buffWrite.write(CABECALHO_OPERACOES_BANCARIAS);
 			buffWrite.newLine();
 		}
-		
+
 		buffRead.close();
-		
+
 		linha.append(operacao.toString().trim());
 		linha.append("," + titular);
 		linha.append("," + quantia_operacao);
 		linha.append("," + quantia_imposto);
 		linha.append("," + formatter.format(date));
-		
+
 		buffWrite.append(linha);
 		buffWrite.newLine();
 		buffWrite.flush();
