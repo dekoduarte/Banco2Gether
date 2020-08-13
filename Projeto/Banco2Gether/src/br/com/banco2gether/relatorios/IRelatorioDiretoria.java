@@ -1,9 +1,9 @@
 package br.com.banco2gether.relatorios;
 
-import java.util.List;
-
-import br.com.banco2gether.usuarios.Cliente;
+import java.io.IOException;
 
 public interface IRelatorioDiretoria {
-	public void relatorioClientesDoBanco(List<Cliente> contas);
+
+	public void relatorioClientesDoBanco() throws IOException;
+
 }

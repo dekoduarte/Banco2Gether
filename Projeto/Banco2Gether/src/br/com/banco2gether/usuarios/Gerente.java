@@ -1,24 +1,22 @@
 package br.com.banco2gether.usuarios;
 
-import br.com.banco2gether.agencias.Agencia;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Predicate;
+
 import br.com.banco2gether.contas.Conta;
 import br.com.banco2gether.relatorios.*;
 import br.com.banco2gether.usuarios.exception.ErrosLoginException;
+import br.com.banco2gether.util.DadosPopulados;
+import br.com.banco2gether.util.ListaModeloGeral;
 
-public class Gerente extends Funcionario{
+public class Gerente extends Funcionario {
 
-	Agencia agencia;
-
-	public Gerente(Agencia agencia) {
-		this.agencia = agencia;
+	public Gerente(String nome, String cpf, String senha, int numero_agencia) {
+		this.numero_agencia = numero_agencia;
+		this.setNome(nome);
+		this.setCpf(cpf);
+		this.setSenha(senha);
 		this.cargo = Cargos.Gerente;
-	}
-	
-	// Relatorio de número de contas na agencia,
-	// atravez do metodo getNumeroContas que vem de agencia.
-	public int getTotalContasNaAgencia()
-	{
-		return this.agencia.getNumeroContas();
 	}
 
 	@Override
@@ -27,4 +25,8 @@ public class Gerente extends Funcionario{
 			throw new ErrosLoginException("Login ou senha inválidos");
 		}
 	}
+	
+	
+
+	
 }

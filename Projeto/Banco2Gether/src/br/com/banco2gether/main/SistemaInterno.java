@@ -1,32 +1,55 @@
 package br.com.banco2gether.main;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.IOException;
 
-import br.com.banco2gether.agencias.Agencia;
-import br.com.banco2gether.contas.Conta;
-import br.com.banco2gether.contas.ContaCorrente;
 import br.com.banco2gether.usuarios.*;
+import br.com.banco2gether.util.DadosPopulados;
+import br.com.banco2gether.util.IOFiles;
 import br.com.banco2gether.util.Sistema;
 
-public class SistemaInterno {
+class SistemaInterno {
+
 	public static void main(String[] args) {
+		DadosPopulados dados = new DadosPopulados();
 
-		List<Conta> contas = new ArrayList<Conta>();
-		
-		contas.add(new ContaCorrente());
-		contas.add(new ContaCorrente());
-		contas.add(new ContaCorrente()); 
+		Usuario usuarioLogado = Sistema.login("2222", "1234");
 
-		
-		Agencia agencia = new Agencia( 1, contas);
-		Gerente gerente1 = new Gerente(agencia);
-		
-		gerente1.setSenha("123");
-		gerente1.setCpf("41404123423");
-		Sistema.login(gerente1, "41404123423", "12345");
-		
-		System.out.println(gerente1.getTotalContasNaAgencia());
-		System.out.println(gerente1.getCargo());
+		if (usuarioLogado != null)
+			if (usuarioLogado instanceof Cliente) {
+				Cliente cliente = (Cliente) usuarioLogado;
+
+				cliente.getConta().sacar(20);
+				cliente.getConta().depositar(100);
+
+				System.out.println(cliente.relatorioTributacaoContaCorrente());
+
+			} else if (usuarioLogado instanceof Gerente) {
+				Gerente gerente = (Gerente) usuarioLogado;
+
+				try {
+					gerente.relatorioContasPorAgencia(gerente.getNumeroAgencia());
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			else if(usuarioLogado instanceof Diretor)
+			{
+				Diretor diretor = (Diretor) usuarioLogado;
+				
+				try {
+					diretor.relatorioClientesDoBanco();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			else if(usuarioLogado instanceof Presidente)
+			{
+				Presidente presidente = (Presidente) usuarioLogado;
+				
+				System.out.println(presidente.relatorioTotalCapitalDoBanco());
+			}
 	}
+
 }
