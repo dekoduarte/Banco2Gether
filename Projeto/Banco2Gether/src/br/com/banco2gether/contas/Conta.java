@@ -13,21 +13,25 @@ public abstract class Conta {
 
 	private Usuario usuario;
 	private int numero_agencia;
+	private int numero_conta;
 	double saldo;
 	private TipoContas tipo_conta;
+	private double simula_rendimento;
+	private double rendimento;
+	private double jurosDiario = 0.00004125;
 
 	public void sacar(double quantia) {
 		if (quantia > this.saldo)
 			throw new SaldoInsuficienteException("Saldo insuficiente");
 
 		if (quantia <= 0)
-			throw new OperacaoComQuantiaZeroException("Valor selecionado Ã© negativo ou zero");
+			throw new OperacaoComQuantiaZeroException("Valor selecionado é negativo ou zero");
 
 		this.saldo -= quantia;
 
 		try {
 			IOFiles.escreveArquivoOperacaoBancaria(this.getUsuario().getNome(), quantia, 0,
-					TipoOperacao.Saque);
+					TipoOperacao.SAQUE);
 		} catch (IOFilesException e) {
 			System.out.println(e.getMessage());
 		} catch (IOException e) {
@@ -37,13 +41,13 @@ public abstract class Conta {
 
 	public void depositar(double quantia) {
 		if (quantia <= 0)
-			throw new OperacaoComQuantiaZeroException("Valor selecionado Ã© negativo ou zero");
+			throw new OperacaoComQuantiaZeroException("Valor selecionado é negativo ou zero");
 
 		this.saldo += quantia;
 		
 		try {
 			IOFiles.escreveArquivoOperacaoBancaria(this.getUsuario().getNome(), quantia, 0,
-					TipoOperacao.Deposito);
+					TipoOperacao.DEPOSITO);
 		} catch (IOFilesException e) {
 			System.out.println(e.getMessage());
 		} catch (IOException e) {
@@ -57,14 +61,14 @@ public abstract class Conta {
 			throw new SaldoInsuficienteException("Saldo insuficiente");
 
 		if (quantia <= 0)
-			throw new OperacaoComQuantiaZeroException("Valor selecionado Ã© negativo ou zero");
+			throw new OperacaoComQuantiaZeroException("Valor selecionado é negativo ou zero");
 		
 		this.saldo -= quantia;
 		conta.saldo += quantia;
 		
 		try {
 			IOFiles.escreveArquivoOperacaoBancaria(this.getUsuario().getNome(), quantia, 0,
-					TipoOperacao.Deposito);
+					TipoOperacao.TRANSFERENCIA);
 		} catch (IOFilesException e) {
 			System.out.println(e.getMessage());
 		} catch (IOException e) {
@@ -103,5 +107,24 @@ public abstract class Conta {
 	public void setTipo_conta(TipoContas tipo_conta) {
 		this.tipo_conta = tipo_conta;
 	}
+	
+	public double getRendimento() {
+		this.rendimento = this.saldo * (jurosDiario * 30);
+		return rendimento;
+	}
+
+	public double SimulaRendimento(double quantia, int dias) {
+		this.simula_rendimento = quantia * (jurosDiario * dias); 
+		return simula_rendimento;
+	}
+	
+	public int getNumConta() {
+		return numero_conta;
+	}
+
+	public void setNumConta(int numero_conta) {
+		this.numero_conta = numero_conta;
+	}
+	
 
 }

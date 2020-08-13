@@ -23,5 +23,9 @@ public class SeguroDeVida implements Tributavel {
 	{
 		return this.tributoSeguroDeVida;
 	}
+	
+	public double getValor() {
+		return this.valor;
+	}
 
 }
