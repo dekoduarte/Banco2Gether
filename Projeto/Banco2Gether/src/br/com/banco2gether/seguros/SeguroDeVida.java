@@ -4,9 +4,8 @@ import br.com.banco2gether.usuarios.Usuario;
 
 public class SeguroDeVida implements Tributavel {
 
-	Usuario usuario;
-	double valor;
-	int numeroApolice;
+	private double valor;
+	private final double tributoSeguroDeVida = 0.2;
 	
 	public SeguroDeVida(double valor) {
 		this.valor = valor;
@@ -15,7 +14,12 @@ public class SeguroDeVida implements Tributavel {
 	
 	@Override
 	public double getValorImposto() {
-		return this.valor * 0.2;
+		return this.valor * this.tributoSeguroDeVida;
+	}
+	
+	public double getTributoSeguroDeVida()
+	{
+		return this.tributoSeguroDeVida;
 	}
 
 }
