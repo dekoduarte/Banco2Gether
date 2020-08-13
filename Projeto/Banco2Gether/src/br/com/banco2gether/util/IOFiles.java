@@ -27,7 +27,8 @@ public final class IOFiles {
 
 	public static final String PATH_RELATORIOS = "../Banco2Gether/src/br/com/banco2gether/arquivos/";
 	public static final String CABECALHO_OPERACOES_BANCARIAS = "OPERACAO,TITULAR,VALOR,IMPOSTO,DATA";
-	public static final String FILE_EXTENSION = ".csv";
+	public static final String FILE_EXTENSION_CSV = ".csv";
+	public static final String FILE_EXTENSION_TXT = System.getProperty("os.name").indexOf("win") >= 0 ? ".txt" : ".text";
 
 	public static String abrirCaminhoDoArquivo() {
 
@@ -35,7 +36,7 @@ public final class IOFiles {
 
 			JFileChooser file = new JFileChooser();
 
-			file.setFileFilter(new FileNameExtensionFilter("*" + FILE_EXTENSION, FILE_EXTENSION));
+			file.setFileFilter(new FileNameExtensionFilter("*" + FILE_EXTENSION_CSV, FILE_EXTENSION_CSV));
 			file.setMultiSelectionEnabled(false);
 			file.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 			file.setFileHidingEnabled(false);
@@ -57,7 +58,7 @@ public final class IOFiles {
 
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 		Date date = new Date();
-		File file = new File(cargo.toString().trim() + formatter.format(date).trim() + ".text");
+		File file = new File(cargo.toString().trim() + formatter.format(date).trim() + FILE_EXTENSION_TXT);
 
 		if (file.createNewFile()) {
 			return file.getName();
@@ -83,7 +84,7 @@ public final class IOFiles {
 
 	public static double leituraDeCapitalDoBanco() throws IOException {
 
-		String path = PATH_RELATORIOS + "OperacaoBancaria.csv";
+		String path = PATH_RELATORIOS + "OperacaoBancaria" + FILE_EXTENSION_CSV;
 		BufferedReader buffRead = new BufferedReader(new FileReader(path));
 
 		String row;
@@ -134,7 +135,7 @@ public final class IOFiles {
 	public static void escreveArquivoOperacaoBancaria(String titular, double quantia_operacao, double quantia_imposto,
 			TipoOperacao operacao) throws IOException {
 
-		String path = PATH_RELATORIOS + "OperacaoBancaria.csv";
+		String path = PATH_RELATORIOS + "OperacaoBancaria" + FILE_EXTENSION_CSV;
 
 		File f = new File(path);
 		if (!f.exists()) {
@@ -170,7 +171,7 @@ public final class IOFiles {
 	public static List<ListaModeloGeral> ListaDados() throws IOException {
 
 		String linha;
-		String path = PATH_RELATORIOS + "Usuario.csv";
+		String path = PATH_RELATORIOS + "Usuario" + FILE_EXTENSION_CSV;
 		List<ListaModeloGeral> lista = new ArrayList<>();
 		BufferedReader csvReader = new BufferedReader(new FileReader(path));
 		linha = csvReader.readLine();
