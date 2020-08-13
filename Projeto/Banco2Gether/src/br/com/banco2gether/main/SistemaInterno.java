@@ -37,7 +37,12 @@ class SistemaInterno {
 			{
 				Diretor diretor = (Diretor) usuarioLogado;
 				
-				diretor.relatorioClientesDoBanco();
+				try {
+					diretor.relatorioClientesDoBanco();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			else if(usuarioLogado instanceof Presidente)
 			{
