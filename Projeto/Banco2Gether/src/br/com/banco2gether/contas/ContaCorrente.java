@@ -30,7 +30,7 @@ public class ContaCorrente extends Conta implements Tributavel {
 
 		try {
 			IOFiles.escreveArquivoOperacaoBancaria(this.getUsuario().getNome(), quantia, tributoSaque,
-					TipoOperacao.Saque);
+					TipoOperacao.SAQUE);
 		} catch (IOFilesException e) {
 			System.out.println(e.getMessage());
 		} catch (IOException e) {
@@ -50,7 +50,7 @@ public class ContaCorrente extends Conta implements Tributavel {
 		
 		try {
 			IOFiles.escreveArquivoOperacaoBancaria(this.getUsuario().getNome(), quantia, tributoDeposito,
-					TipoOperacao.Deposito);
+					TipoOperacao.DEPOSITO);
 		} catch (IOFilesException e) {
 			System.out.println(e.getMessage());
 		} catch (IOException e) {
@@ -75,7 +75,7 @@ public class ContaCorrente extends Conta implements Tributavel {
 		
 		try {
 			IOFiles.escreveArquivoOperacaoBancaria(this.getUsuario().getNome(), quantia, tributoTransferencia,
-					TipoOperacao.Transferencia);
+					TipoOperacao.TRANSFERENCIA);
 		} catch (IOFilesException e) {
 			System.out.println(e.getMessage());
 		} catch (IOException e) {

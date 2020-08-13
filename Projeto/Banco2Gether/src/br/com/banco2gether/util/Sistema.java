@@ -39,16 +39,18 @@ public final class Sistema {
 
 					if (u.tipo_conta.equalsIgnoreCase(CONTA_CORRENTE)) {
 						ContaCorrente cc = new ContaCorrente();
-						cc.setTipo_conta(TipoContas.Corrente);
+						cc.setTipo_conta(TipoContas.CORRENTE);
 						cc.setAgencia(u.numero_agencia);
 						cc.setSaldo(u.saldo_conta);
+						cc.setNumConta(u.numero_conta);
 						cliente.setConta(cc);
 						conta = cc;
 					} else {
 						ContaPoupanca cp = new ContaPoupanca();
-						cp.setTipo_conta(TipoContas.Poupanca);
+						cp.setTipo_conta(TipoContas.POUPANCA);
 						cp.setAgencia(u.numero_agencia);
 						cp.setSaldo(u.saldo_conta);
+						cp.setNumConta(u.numero_conta);
 						cliente.setConta(cp);
 						conta = cp;
 					}
@@ -67,16 +69,18 @@ public final class Sistema {
 
 					if (u.tipo_conta.equalsIgnoreCase(CONTA_CORRENTE)) {
 						ContaCorrente cc = new ContaCorrente();
-						cc.setTipo_conta(TipoContas.Corrente);
+						cc.setTipo_conta(TipoContas.CORRENTE);
 						cc.setAgencia(u.numero_agencia);
 						cc.setSaldo(u.saldo_conta);
+						cc.setNumConta(u.numero_conta);					
 						gerente.setConta(cc);
 						conta = cc;
 					} else {
 						ContaPoupanca cp = new ContaPoupanca();
-						cp.setTipo_conta(TipoContas.Poupanca);
+						cp.setTipo_conta(TipoContas.POUPANCA);
 						cp.setAgencia(u.numero_agencia);
 						cp.setSaldo(u.saldo_conta);
+						cp.setNumConta(u.numero_conta);
 						gerente.setConta(cp);
 						conta = cp;
 					}
@@ -95,16 +99,18 @@ public final class Sistema {
 
 					if (u.tipo_conta.equalsIgnoreCase(CONTA_CORRENTE)) {
 						ContaCorrente cc = new ContaCorrente();
-						cc.setTipo_conta(TipoContas.Corrente);
+						cc.setTipo_conta(TipoContas.CORRENTE);
 						cc.setAgencia(u.numero_agencia);
 						cc.setSaldo(u.saldo_conta);
+						cc.setNumConta(u.numero_conta);
 						diretor.setConta(cc);
 						conta = cc;
 					} else {
 						ContaPoupanca cp = new ContaPoupanca();
-						cp.setTipo_conta(TipoContas.Poupanca);
+						cp.setTipo_conta(TipoContas.POUPANCA);
 						cp.setAgencia(u.numero_agencia);
 						cp.setSaldo(u.saldo_conta);
+						cp.setNumConta(u.numero_conta);
 						diretor.setConta(cp);
 						conta = cp;
 					}
@@ -122,16 +128,18 @@ public final class Sistema {
 
 					if (u.tipo_conta.equalsIgnoreCase(CONTA_CORRENTE)) {
 						ContaCorrente cc = new ContaCorrente();
-						cc.setTipo_conta(TipoContas.Corrente);
+						cc.setTipo_conta(TipoContas.CORRENTE);
 						cc.setAgencia(u.numero_agencia);
 						cc.setSaldo(u.saldo_conta);
+						cc.setNumConta(u.numero_conta);
 						presidente.setConta(cc);
 						conta = cc;
 					} else {
 						ContaPoupanca cp = new ContaPoupanca();
-						cp.setTipo_conta(TipoContas.Poupanca);
+						cp.setTipo_conta(TipoContas.POUPANCA);
 						cp.setAgencia(u.numero_agencia);
 						cp.setSaldo(u.saldo_conta);
+						cp.setNumConta(u.numero_conta);
 						presidente.setConta(cp);
 						conta = cp;
 					}
@@ -142,9 +150,6 @@ public final class Sistema {
 					return presidente;
 				}
 			}
-			else
-				throw new ErrosLoginException("Usuario nao existe.");
-
 		}
 		return null;
 	}
