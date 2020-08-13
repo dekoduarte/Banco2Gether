@@ -1,5 +1,7 @@
 package br.com.banco2gether.util;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -22,11 +24,11 @@ public final class Sistema {
 	private final static String CONTA_POUPANCA = "cp";
 
 	public static Usuario login(String cpf, String senha) {
-		
+
 		List<ListaModeloGeral> usuarios = recuperaUsuariosDoSistema();
 
 		for (ListaModeloGeral u : usuarios) {
-			if (u.cpf == cpf && u.senha == senha) {
+			if (cpf.equalsIgnoreCase(u.cpf) && senha.equalsIgnoreCase(u.senha)) {
 
 				if (u.tipo_usuario.equalsIgnoreCase("Cliente")) {
 
@@ -53,7 +55,7 @@ public final class Sistema {
 
 					conta.setUsuario(cliente);
 					conta.setAgencia(u.numero_agencia);
-					
+
 					return cliente;
 
 				} else if (u.tipo_usuario.equalsIgnoreCase("Gerente")) {
@@ -81,9 +83,9 @@ public final class Sistema {
 
 					conta.setUsuario(gerente);
 					conta.setAgencia(u.numero_agencia);
-					
+
 					return gerente;
-					
+
 				} else if (u.tipo_usuario.equalsIgnoreCase("Diretor")) {
 
 					Diretor diretor = new Diretor(u.nome, u.cpf, u.senha);
@@ -109,9 +111,9 @@ public final class Sistema {
 
 					conta.setUsuario(diretor);
 					conta.setAgencia(u.numero_agencia);
-					
+
 					return diretor;
-					
+
 				} else {
 					Presidente presidente = new Presidente(u.nome, u.cpf, u.senha);
 					Conta conta;
@@ -136,7 +138,7 @@ public final class Sistema {
 
 					conta.setUsuario(presidente);
 					conta.setAgencia(u.numero_agencia);
-					
+
 					return presidente;
 				}
 			}
@@ -161,8 +163,18 @@ public final class Sistema {
 	}
 
 	public static List<ListaModeloGeral> recuperaUsuariosDoSistema() {
-		DadosPopulados dados = new DadosPopulados();
+		// Dados staticos
+//		DadosPopulados dados = new DadosPopulados();
 
-		return dados.getLista();
+//		Dados do arquivo
+		List<ListaModeloGeral> lista = new ArrayList<>();
+		try {
+			lista = IOFiles.ListaDados();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return lista;
 	}
 }
