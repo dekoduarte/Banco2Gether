@@ -88,4 +88,16 @@ public class ContaCorrente extends Conta implements Tributavel {
 		return totalTributado;
 	}
 
+	public double getTributoSaque() {
+		return tributoSaque;
+	}
+
+	public double getTributoDeposito() {
+		return tributoDeposito;
+	}
+
+	public double getTributoTransferencia() {
+		return tributoTransferencia;
+	}
+
 }

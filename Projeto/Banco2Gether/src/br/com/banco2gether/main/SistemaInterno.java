@@ -18,6 +18,8 @@ class SistemaInterno {
 				
 				cliente.getConta().sacar(20);
 				cliente.getConta().depositar(100);
+				
+				System.out.println(cliente.relatorioTributacaoContaCorrente());
 		
 			}else if(usuarioLogado instanceof Gerente)
 			{
