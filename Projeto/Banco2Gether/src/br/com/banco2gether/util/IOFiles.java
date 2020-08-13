@@ -58,7 +58,7 @@ public final class IOFiles {
 		if (file.createNewFile()) {
 			return file.getName();
 		} else
-			throw new IOFilesException("Erro ao criar o arquivo de texto.");
+			throw new IOFilesException("Erro ao criar o arquivo.");
 	}
 
 	public static void leituraArquivo(String path) throws IOException {
@@ -77,17 +77,21 @@ public final class IOFiles {
 		buffRead.close();
 	}
 
-	public static void escreveArquivoOperacaoBancaria(Conta conta, TipoOperacao operacao) throws IOException {
+	public static void escreveArquivoOperacaoBancaria(String titular,double quantia_operacao, double quantia_imposto, TipoOperacao operacao) throws IOException {
 		
 		String path = PATH_RELATORIOS + "OperacaoBancaria.csv";
 		
+		File f = new File(path);
+	    if (!f.exists()){
+	        f.createNewFile();
+	    }
+		
 		BufferedReader buffRead = new BufferedReader(new FileReader(path));
-		BufferedWriter buffWrite = new BufferedWriter(new FileWriter(path));
+		BufferedWriter buffWrite = new BufferedWriter(new FileWriter(path, true));
 		
 		StringBuilder linha = new StringBuilder();
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 		Date date = new Date();
-		
 		
 		if(buffRead.readLine() == null)
 		{
@@ -95,16 +99,17 @@ public final class IOFiles {
 			buffWrite.newLine();
 		}
 		
-		buffWrite.close();
+		buffRead.close();
 		
 		linha.append(operacao.toString().trim());
-		linha.append(",Conta.titular");
-		linha.append(",Conta.valor");
-		linha.append(",Conta.imposto");
+		linha.append("," + titular);
+		linha.append("," + quantia_operacao);
+		linha.append("," + quantia_imposto);
 		linha.append("," + formatter.format(date));
 		
 		buffWrite.append(linha);
 		buffWrite.newLine();
+		buffWrite.flush();
 		buffWrite.close();
 	}
 
