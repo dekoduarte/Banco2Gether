@@ -7,7 +7,7 @@ public class ListaModeloGeral {
 	String tipo_usuario;
 	String tipo_conta;
 	int numero_conta;
-	double saldo_conta;
+	public double saldo_conta;
 	public int numero_agencia;
 	
 	public ListaModeloGeral(String nome, String cpf, String senha, String tipo_usuario, String tipo_conta,

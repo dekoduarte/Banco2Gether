@@ -12,8 +12,7 @@ class SistemaInterno {
 	public static void main(String[] args) {
 		DadosPopulados dados = new DadosPopulados();
 
-		Usuario usuarioLogado = Sistema.login("192837", "1475");
-
+		Usuario usuarioLogado = Sistema.login("2222", "1234");
 
 		if (usuarioLogado != null)
 			if (usuarioLogado instanceof Cliente) {
@@ -28,13 +27,11 @@ class SistemaInterno {
 				Gerente gerente = (Gerente) usuarioLogado;
 
 				try {
-					IOFiles.ListaDados();
+					gerente.relatorioContasPorAgencia(gerente.getNumeroAgencia());
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-
-				System.out.println(gerente.relatorioContasPorAgencia(gerente.getNumeroAgencia()));
 			}
 			else if(usuarioLogado instanceof Diretor)
 			{

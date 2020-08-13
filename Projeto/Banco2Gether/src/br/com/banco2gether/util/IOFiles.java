@@ -27,7 +27,7 @@ public final class IOFiles {
 
 	public static final String PATH_RELATORIOS = "../Banco2Gether/src/br/com/banco2gether/arquivos/";
 	public static final String CABECALHO_OPERACOES_BANCARIAS = "OPERACAO,TITULAR,VALOR,IMPOSTO,DATA";
-	public static final String FILE_EXTENSION = "csv";
+	public static final String FILE_EXTENSION = ".csv";
 
 	public static String abrirCaminhoDoArquivo() {
 
@@ -45,9 +45,9 @@ public final class IOFiles {
 				return f.getAbsolutePath();
 			}
 		} catch (NullPointerException e) {
-
+			e.printStackTrace();
 		} catch (RuntimeException e) {
-
+			e.printStackTrace();
 		}
 
 		return "";
@@ -57,7 +57,7 @@ public final class IOFiles {
 
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 		Date date = new Date();
-		File file = new File(cargo.toString().trim() + formatter.format(date).trim() + FILE_EXTENSION);
+		File file = new File(cargo.toString().trim() + formatter.format(date).trim() + ".text");
 
 		if (file.createNewFile()) {
 			return file.getName();
@@ -97,9 +97,38 @@ public final class IOFiles {
 			total += Double.parseDouble(data[3]);
 
 		}
+		
+		BufferedWriter buffWrite = new BufferedWriter(new FileWriter(PATH_RELATORIOS + criarArquivo(Cargos.Presidente)));
+
+		buffWrite.append("Atualmente o capital do banco2Gether é: " + total);
+		buffWrite.close();
 
 		return total;
 
+	}
+
+	public static void escreveRelatorioContasPorAgencia(int total, Cargos cargo) throws IOException {
+		String path = PATH_RELATORIOS + criarArquivo(cargo);
+		BufferedWriter buffWrite = new BufferedWriter(new FileWriter(path));
+		StringBuilder linha = new StringBuilder();
+
+		buffWrite.append("Existem atualmente " + total + " clientes na sua agencia.");
+		buffWrite.close();
+	}
+	
+	public static void escreveRelatorioClientesDoBanco(Cargos cargo) throws IOException {
+		String path = PATH_RELATORIOS + criarArquivo(cargo);
+		BufferedWriter buffWrite = new BufferedWriter(new FileWriter(path));
+		StringBuilder linha = new StringBuilder();
+
+		DadosPopulados dados = new DadosPopulados();
+		
+		for(ListaModeloGeral c : dados.getLista())
+		{
+			buffWrite.append("Nome: " + c.nome + ", CPF: " + c.cpf + ", Agencia: " + c.numero_agencia );
+		}
+
+		buffWrite.close();
 	}
 
 	public static void escreveArquivoOperacaoBancaria(String titular, double quantia_operacao, double quantia_imposto,
