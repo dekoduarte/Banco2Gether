@@ -39,14 +39,14 @@ public final class Sistema {
 
 					if (u.tipo_conta.equalsIgnoreCase(CONTA_CORRENTE)) {
 						ContaCorrente cc = new ContaCorrente();
-						cc.setTipo_conta(TipoContas.CONTA_CORRENTE);
+						cc.setTipo_conta(TipoContas.Corrente);
 						cc.setAgencia(u.numero_agencia);
 						cc.setSaldo(u.saldo_conta);
 						cliente.setConta(cc);
 						conta = cc;
 					} else {
 						ContaPoupanca cp = new ContaPoupanca();
-						cp.setTipo_conta(TipoContas.CONTA_POUPANCA);
+						cp.setTipo_conta(TipoContas.Poupanca);
 						cp.setAgencia(u.numero_agencia);
 						cp.setSaldo(u.saldo_conta);
 						cliente.setConta(cp);
@@ -67,14 +67,14 @@ public final class Sistema {
 
 					if (u.tipo_conta.equalsIgnoreCase(CONTA_CORRENTE)) {
 						ContaCorrente cc = new ContaCorrente();
-						cc.setTipo_conta(TipoContas.CONTA_CORRENTE);
+						cc.setTipo_conta(TipoContas.Corrente);
 						cc.setAgencia(u.numero_agencia);
 						cc.setSaldo(u.saldo_conta);
 						gerente.setConta(cc);
 						conta = cc;
 					} else {
 						ContaPoupanca cp = new ContaPoupanca();
-						cp.setTipo_conta(TipoContas.CONTA_POUPANCA);
+						cp.setTipo_conta(TipoContas.Poupanca);
 						cp.setAgencia(u.numero_agencia);
 						cp.setSaldo(u.saldo_conta);
 						gerente.setConta(cp);
@@ -95,14 +95,14 @@ public final class Sistema {
 
 					if (u.tipo_conta.equalsIgnoreCase(CONTA_CORRENTE)) {
 						ContaCorrente cc = new ContaCorrente();
-						cc.setTipo_conta(TipoContas.CONTA_CORRENTE);
+						cc.setTipo_conta(TipoContas.Corrente);
 						cc.setAgencia(u.numero_agencia);
 						cc.setSaldo(u.saldo_conta);
 						diretor.setConta(cc);
 						conta = cc;
 					} else {
 						ContaPoupanca cp = new ContaPoupanca();
-						cp.setTipo_conta(TipoContas.CONTA_POUPANCA);
+						cp.setTipo_conta(TipoContas.Poupanca);
 						cp.setAgencia(u.numero_agencia);
 						cp.setSaldo(u.saldo_conta);
 						diretor.setConta(cp);
@@ -122,14 +122,14 @@ public final class Sistema {
 
 					if (u.tipo_conta.equalsIgnoreCase(CONTA_CORRENTE)) {
 						ContaCorrente cc = new ContaCorrente();
-						cc.setTipo_conta(TipoContas.CONTA_CORRENTE);
+						cc.setTipo_conta(TipoContas.Corrente);
 						cc.setAgencia(u.numero_agencia);
 						cc.setSaldo(u.saldo_conta);
 						presidente.setConta(cc);
 						conta = cc;
 					} else {
 						ContaPoupanca cp = new ContaPoupanca();
-						cp.setTipo_conta(TipoContas.CONTA_POUPANCA);
+						cp.setTipo_conta(TipoContas.Poupanca);
 						cp.setAgencia(u.numero_agencia);
 						cp.setSaldo(u.saldo_conta);
 						presidente.setConta(cp);
