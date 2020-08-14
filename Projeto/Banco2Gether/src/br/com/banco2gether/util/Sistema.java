@@ -1,5 +1,6 @@
 package br.com.banco2gether.util;
 
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
