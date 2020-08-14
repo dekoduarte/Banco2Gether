@@ -3,7 +3,6 @@ package br.com.banco2gether.usuarios;
 
 import java.io.IOException;
 import java.util.Comparator;
-import java.util.Comparator;
 import java.util.List;
 
 import br.com.banco2gether.relatorios.IRelatorioDiretoria;
