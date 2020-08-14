@@ -16,9 +16,8 @@ public abstract class Conta {
 	private int numero_conta;
 	double saldo;
 	private TipoContas tipo_conta;
-	private double simula_rendimento;
-	private double rendimento;
-	private double jurosDiario = 0.00004125;
+	protected double simula_rendimento;
+	protected double rendimento;
 
 	public void sacar(double quantia) {
 		if (quantia > this.saldo)
@@ -106,17 +105,7 @@ public abstract class Conta {
 
 	public void setTipo_conta(TipoContas tipo_conta) {
 		this.tipo_conta = tipo_conta;
-	}
-	
-	public double getRendimento() {
-		this.rendimento = this.saldo * (jurosDiario * 30);
-		return rendimento;
-	}
-
-	public double SimulaRendimento(double quantia, int dias) {
-		this.simula_rendimento = quantia * (jurosDiario * dias); 
-		return simula_rendimento;
-	}
+	}	
 	
 	public int getNumConta() {
 		return numero_conta;
@@ -126,5 +115,12 @@ public abstract class Conta {
 		this.numero_conta = numero_conta;
 	}
 	
+	public double getRendimento() {
+		return rendimento;
+	}
+	
+	public double SimulaRendimento(double quantia, int dias) {
+		return simula_rendimento;
+	}
 
 }

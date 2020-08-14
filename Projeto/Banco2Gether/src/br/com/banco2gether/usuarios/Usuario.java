@@ -6,7 +6,7 @@ import br.com.banco2gether.contas.Conta;
 import br.com.banco2gether.contas.ContaCorrente;
 import br.com.banco2gether.seguros.SeguroDeVida;
 
-public abstract class Usuario {
+public abstract class Usuario implements Autenticavel {
 	private String nome;
 	private String cpf;
 	private String senha;

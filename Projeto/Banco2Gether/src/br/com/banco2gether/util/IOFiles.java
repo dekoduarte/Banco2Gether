@@ -99,9 +99,9 @@ public final class IOFiles {
 
 		}
 		
-		BufferedWriter buffWrite = new BufferedWriter(new FileWriter(PATH_RELATORIOS + criarArquivo(Cargos.Presidente)));
+		BufferedWriter buffWrite = new BufferedWriter(new FileWriter(PATH_RELATORIOS + criarArquivo(Cargos.PRESIDENTE)));
 
-		buffWrite.append("Atualmente o capital do banco2Gether Ã©: " + total);
+		buffWrite.append("Atualmente o capital do banco2Gether é: " + total);
 		buffWrite.close();
 
 		return total;
@@ -122,11 +122,11 @@ public final class IOFiles {
 		BufferedWriter buffWrite = new BufferedWriter(new FileWriter(path));
 		StringBuilder linha = new StringBuilder();
 
-		DadosPopulados dados = new DadosPopulados();
 		
-		for(ListaModeloGeral c : dados.getLista())
+		
+		for(Usuario c : Sistema.tabelaUsuario)
 		{
-			buffWrite.append("Nome: " + c.nome + ", CPF: " + c.cpf + ", Agencia: " + c.numero_agencia );
+			buffWrite.append("Nome: " + c.getNome() + ", CPF: " + c.getCpf() + ", Agencia: " + c.getConta().getAgencia() );
 		}
 
 		buffWrite.close();
@@ -168,26 +168,6 @@ public final class IOFiles {
 		buffWrite.close();
 	}
 
-	public static List<ListaModeloGeral> ListaDados() throws IOException {
-
-		String linha;
-		String path = PATH_RELATORIOS + "Usuario" + FILE_EXTENSION_CSV;
-		List<ListaModeloGeral> lista = new ArrayList<>();
-		BufferedReader csvReader = new BufferedReader(new FileReader(path));
-		linha = csvReader.readLine();
-
-		while ((linha = csvReader.readLine()) != null) {
-			String[] data = linha.split(",");
-
-			lista.add(new ListaModeloGeral(data[0], data[1], data[2], data[3], data[4], Integer.parseInt(data[5]),
-					Double.parseDouble(data[6]), Integer.parseInt(data[7])));
-
-		}
-
-		csvReader.close();
-
-		return lista;
-
-	}
+	
 
 }
