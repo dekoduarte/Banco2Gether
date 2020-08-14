@@ -8,4 +8,12 @@ Projeto/Banco2Gether/bin/.classpath
 
 .classpath
 
+
+*.text
+
+*.class
+
 Projeto/Banco2Gether.rar
+
+
+*.csv
