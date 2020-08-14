@@ -25,7 +25,7 @@ public abstract class Funcionario extends Usuario implements Autenticavel {
 		
 		System.out.println("Existem atualmente " + total_agencia.intValue() + " clientes na sua agencia. \n");
 		
-		IOFiles.escreveRelatorioContasPorAgencia(total_agencia.intValue(), Cargos.Gerente);
+		IOFiles.escreveRelatorioContasPorAgencia(total_agencia.intValue(), Cargos.GERENTE);
 	}
 
 	public Cargos getCargo() {

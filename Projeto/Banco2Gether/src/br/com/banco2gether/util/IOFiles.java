@@ -99,9 +99,9 @@ public final class IOFiles {
 
 		}
 		
-		BufferedWriter buffWrite = new BufferedWriter(new FileWriter(PATH_RELATORIOS + criarArquivo(Cargos.Presidente)));
+		BufferedWriter buffWrite = new BufferedWriter(new FileWriter(PATH_RELATORIOS + criarArquivo(Cargos.PRESIDENTE)));
 
-		buffWrite.append("Atualmente o capital do banco2Gether Ã©: " + total);
+		buffWrite.append("Atualmente o capital do banco2Gether é: " + total);
 		buffWrite.close();
 
 		return total;

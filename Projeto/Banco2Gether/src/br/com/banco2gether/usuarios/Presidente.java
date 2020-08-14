@@ -15,7 +15,7 @@ public class Presidente extends Funcionario implements IRelatorioDiretoria, IRel
 		this.setNome(nome);
 		this.setCpf(cpf);
 		this.setSenha(senha);
-		this.setCargo(Cargos.Presidente);
+		this.setCargo(Cargos.PRESIDENTE);
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class Presidente extends Funcionario implements IRelatorioDiretoria, IRel
 		lista.stream().map(c -> "Nome: " + c.getNome() + ", CPF: " + c.getCpf() + ", Agencia: " + c.getConta().getAgencia())
 				.forEach(System.out::println);
 		
-		IOFiles.escreveRelatorioClientesDoBanco(Cargos.Diretor);
+		IOFiles.escreveRelatorioClientesDoBanco(Cargos.PRESIDENTE);
 	}
 
 	@Override

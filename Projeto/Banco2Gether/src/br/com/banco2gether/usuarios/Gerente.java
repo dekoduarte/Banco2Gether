@@ -16,13 +16,13 @@ public class Gerente extends Funcionario {
 		this.setNome(nome);
 		this.setCpf(cpf);
 		this.setSenha(senha);
-		this.cargo = Cargos.Gerente;
+		this.cargo = Cargos.GERENTE;
 	}
 
 	@Override
 	public void autenticar(String cpf, String senha) {
 		if (!this.getCpf().equals(cpf) || !this.getSenha().equals(senha)) {
-			throw new ErrosLoginException("Login ou senha inv√°lidos");
+			throw new ErrosLoginException("Login ou senha inv·lidos");
 		}
 	}
 	
