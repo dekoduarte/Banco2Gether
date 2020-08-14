@@ -1,5 +1,6 @@
 package br.com.banco2gether.util;
 
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +40,10 @@ public final class Sistema {
 
 	public static Usuario buscaUsuario(String cpf) {
 		return (Usuario) tabelaUsuario.stream().filter(u -> cpf.equals(u.getCpf())).findFirst().orElse(null);
+	}
+	
+	public static Usuario buscaUsuario(int numero_conta) {
+		return (Usuario) tabelaUsuario.stream().filter(u -> numero_conta == u.getConta().getNumConta()).findFirst().orElse(null);
 	}
 
 	public static double relatorioDeTributacao(Tributavel obj) {
