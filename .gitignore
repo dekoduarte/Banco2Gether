@@ -13,3 +13,7 @@ Projeto/Banco2Gether.rar
 *.class
 
 Projeto/Banco2Gether/bin/br/com/banco2gether/arquivos/OperacaoBancaria.csv
+
+*.text
+
+*.csv
