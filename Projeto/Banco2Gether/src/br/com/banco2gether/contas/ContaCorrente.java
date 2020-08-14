@@ -23,7 +23,7 @@ public class ContaCorrente extends Conta implements Tributavel {
 			throw new SaldoInsuficienteException("Saldo insuficiente");
 
 		if (quantia <= 0)
-			throw new OperacaoComQuantiaZeroException("Valor selecionado é negativo ou zero");
+			throw new OperacaoComQuantiaZeroException("Valor selecionado ï¿½ negativo ou zero");
 		
 		this.saldo -= quantia + tributoSaque;
 		this.totalTributado += tributoSaque;
@@ -43,7 +43,7 @@ public class ContaCorrente extends Conta implements Tributavel {
 	public void depositar(double quantia) {
 		
 		if (quantia <= 0)
-			throw new OperacaoComQuantiaZeroException("Valor selecionado é negativo ou zero");
+			throw new OperacaoComQuantiaZeroException("Valor selecionado ï¿½ negativo ou zero");
 		
 		this.saldo += quantia - tributoDeposito;
 		this.totalTributado += tributoDeposito;
@@ -61,12 +61,16 @@ public class ContaCorrente extends Conta implements Tributavel {
 
 	@Override
 	public void transferir(Conta conta, double quantia) {
+		if(this.getNumConta() == conta.getNumConta())
+		{
+			throw new RuntimeException("Nao Ã© permitido tranferencia papara mesma conta");
+		}
 		
 		if (quantia + tributoTransferencia > this.saldo)
 			throw new SaldoInsuficienteException("Saldo insuficiente");
 
 		if (quantia <= 0)
-			throw new OperacaoComQuantiaZeroException("Valor selecionado é negativo ou zero");
+			throw new OperacaoComQuantiaZeroException("Valor selecionado ï¿½ negativo ou zero");
 		
 		this.saldo -= quantia + tributoTransferencia;
 		conta.saldo += quantia;
