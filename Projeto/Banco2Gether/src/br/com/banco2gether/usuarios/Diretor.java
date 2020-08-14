@@ -18,13 +18,13 @@ public class Diretor extends Funcionario implements IRelatorioDiretoria {
 		this.setNome(nome);
 		this.setCpf(cpf);
 		this.setSenha(senha);
-		this.setCargo(Cargos.Diretor);
+		this.setCargo(Cargos.DIRETOR);
 	}
 
 	@Override
 	public void autenticar(String cpf, String senha) {
 		if (!this.getCpf().equals(cpf) || !this.getSenha().equals(senha)) {
-			throw new ErrosLoginException("Login ou senha invÃ¡lidos");
+			throw new ErrosLoginException("Login ou senha inválidos");
 		}
 	}
 
@@ -39,6 +39,6 @@ public class Diretor extends Funcionario implements IRelatorioDiretoria {
 		.map(c -> "Nome: " + c.getNome() + ", CPF: " + c.getCpf() + ", Agencia: " + c.getConta().getAgencia() )
 		.forEach(System.out::println);
 		
-		IOFiles.escreveRelatorioClientesDoBanco(Cargos.Diretor);
+		IOFiles.escreveRelatorioClientesDoBanco(Cargos.DIRETOR);
 	}
 }
