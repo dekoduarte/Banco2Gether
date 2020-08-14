@@ -24,7 +24,7 @@ public abstract class Conta {
 			throw new SaldoInsuficienteException("Saldo insuficiente");
 
 		if (quantia <= 0)
-			throw new OperacaoComQuantiaZeroException("Valor selecionado é negativo ou zero");
+			throw new OperacaoComQuantiaZeroException("Valor selecionado ï¿½ negativo ou zero");
 
 		this.saldo -= quantia;
 
@@ -40,7 +40,7 @@ public abstract class Conta {
 
 	public void depositar(double quantia) {
 		if (quantia <= 0)
-			throw new OperacaoComQuantiaZeroException("Valor selecionado é negativo ou zero");
+			throw new OperacaoComQuantiaZeroException("Valor selecionado ï¿½ negativo ou zero");
 
 		this.saldo += quantia;
 		
@@ -55,12 +55,16 @@ public abstract class Conta {
 	}
 
 	public void transferir(Conta conta, double quantia) {
+		if(this.getNumConta() == conta.getNumConta())
+		{
+			throw new RuntimeException("Nao Ã© permitido tranferencia papara mesma conta");
+		}
 		
 		if (quantia > this.saldo)
 			throw new SaldoInsuficienteException("Saldo insuficiente");
 
 		if (quantia <= 0)
-			throw new OperacaoComQuantiaZeroException("Valor selecionado é negativo ou zero");
+			throw new OperacaoComQuantiaZeroException("Valor selecionado ï¿½ negativo ou zero");
 		
 		this.saldo -= quantia;
 		conta.saldo += quantia;
