@@ -16,11 +16,11 @@ public class DadosPopulados {
 	private List<ListaModeloGeral> lista = new ArrayList<ListaModeloGeral>();
 
 	public DadosPopulados() {
-		this.lista = listaDeUsuariosStatico();
-		//this.lista = listaDeUsuariosDoArquivo();
+		// this.lista = listaDeUsuariosStatico();
+		this.lista = listaDeUsuariosDoArquivo();
 	}
-	
-	public List<ListaModeloGeral> getLista() throws IOException  {
+
+	public List<ListaModeloGeral> getLista() throws IOException {
 		return lista;
 	}
 
@@ -41,23 +41,29 @@ public class DadosPopulados {
 
 		return lista;
 	}
-	
-	public static List<ListaModeloGeral> listaDeUsuariosDoArquivo() throws IOException {
+
+	public static List<ListaModeloGeral> listaDeUsuariosDoArquivo() {
 
 		String linha;
 		String path = IOFiles.PATH_RELATORIOS + "Usuario" + IOFiles.FILE_EXTENSION_CSV;
 		List<ListaModeloGeral> lista = new ArrayList<>();
-		BufferedReader csvReader = new BufferedReader(new FileReader(path));
-		linha = csvReader.readLine();
 
-		while ((linha = csvReader.readLine()) != null) {
-			String[] data = linha.split(",");
+		try {
+			BufferedReader csvReader = new BufferedReader(new FileReader(path));
+			linha = csvReader.readLine();
 
-			lista.add(new ListaModeloGeral(data[0], data[1], data[2], data[3], data[4], Integer.parseInt(data[5]),
-					Double.parseDouble(data[6]), Integer.parseInt(data[7])));
+			while ((linha = csvReader.readLine()) != null) {
+				String[] data = linha.split(",");
+
+				lista.add(new ListaModeloGeral(data[0], data[1], data[2], data[3], data[4], Integer.parseInt(data[5]),
+						Double.parseDouble(data[6]), Integer.parseInt(data[7])));
+
+			}
+
+			csvReader.close();
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
 		}
-
-		csvReader.close();
 
 		return lista;
 

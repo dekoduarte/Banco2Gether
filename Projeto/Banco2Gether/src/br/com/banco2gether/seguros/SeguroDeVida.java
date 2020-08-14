@@ -1,8 +1,5 @@
 package br.com.banco2gether.seguros;
 
-import br.com.banco2gether.contas.Conta;
-import br.com.banco2gether.usuarios.Usuario;
-
 public class SeguroDeVida implements Tributavel {
 
 	private double valor;
