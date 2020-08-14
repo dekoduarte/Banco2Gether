@@ -35,7 +35,7 @@ public class Presidente extends Funcionario implements IRelatorioDiretoria, IRel
 				.map(c -> "Nome: " + c.getNome() + ", CPF: " + c.getCpf() + ", Agencia: " + c.getConta().getAgencia())
 				.forEach(System.out::println);
 
-		IOFiles.escreveRelatorioClientesDoBanco(Cargos.Presidente);
+		IOFiles.escreveRelatorioClientesDoBanco(Cargos.PRESIDENTE);
 	}
 
 	@Override
