@@ -1,10 +1,13 @@
 package br.com.banco2gether.usuarios;
 
+import java.io.IOException;
 import java.text.DecimalFormat;
 
 import br.com.banco2gether.contas.Conta;
 import br.com.banco2gether.contas.ContaCorrente;
+import br.com.banco2gether.operacoes.TipoOperacao;
 import br.com.banco2gether.seguros.SeguroDeVida;
+import br.com.banco2gether.util.IOFiles;
 
 public abstract class Usuario implements Autenticavel {
 	private String nome;
@@ -14,7 +17,7 @@ public abstract class Usuario implements Autenticavel {
 	private SeguroDeVida seguroDeVida;
 	
 	public final String retornoSaldo = "Saldo em conta: R$";
-	public final String retornoTotalTributadoNaConta = "Valores tributados em sua conta atÃ© o presente momento: R$";
+	public final String retornoTotalTributadoNaConta = "Valores tributados em sua conta até o presente momento: R$";
 	
 	public String relatorioSaldo() {
 		return  retornoSaldo + this.getConta().getSaldo();
@@ -24,13 +27,13 @@ public abstract class Usuario implements Autenticavel {
 		ContaCorrente cc = (ContaCorrente) this.getConta();
 		StringBuilder texto = new StringBuilder();
 		DecimalFormat df = new DecimalFormat("0.00");
-		
-		texto.append(retornoTotalTributadoNaConta + cc.getValorImposto());
-		texto.append("\n----------------------------------------------------------");
-		texto.append("\n-----------------Tributacao Bancaria----------------------");
+				
+		texto.append("\n\n-----------------Tributacao Bancaria----------------------");
 		texto.append("\nSaques: R$" + df.format(cc.getTributoSaque()));
 		texto.append("\nDepositos: R$" + df.format(cc.getTributoDeposito()));
 		texto.append("\nTransferencias: R$" + df.format(cc.getTributoTransferencia()));
+		texto.append("\n------------------------------------------------------------\n");
+		texto.append(retornoTotalTributadoNaConta + cc.getValorImposto());
 		
 		if(this.seguroDeVida != null)
 			texto.append("\nSeguro de vida:" +  df.format(this.seguroDeVida.getTributoSeguroDeVida()) + "%");
@@ -39,8 +42,13 @@ public abstract class Usuario implements Autenticavel {
 		
 	}
 	
-	public void contrataSeguroDeVida(double quantia) {
+	public void contrataSeguroDeVida(double quantia) {		
 		this.seguroDeVida = new SeguroDeVida(quantia);
+		try {
+			IOFiles.escreveArquivoOperacaoBancaria(this.nome, quantia, this.seguroDeVida.getValorImposto(), TipoOperacao.SEGURO);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public String relatorioRendimentoPoupanca() {
