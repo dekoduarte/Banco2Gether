@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import br.com.banco2gether.contas.*;
+import br.com.banco2gether.operacoes.TipoOperacao;
 import br.com.banco2gether.usuarios.*;
 import br.com.banco2gether.usuarios.exception.*;
 import br.com.banco2gether.util.*;
@@ -27,7 +28,7 @@ class SistemaInterno {
 		if (opcao == OpcoesMenu.INICIO) {
 
 			System.out.println(
-					"\t\t\t\t\tMENU de Acesso Especial\n\n-- (1) = Entrar como Cliente (Conta Particular)\t\t(2) = Entrar do Menu Banco (Gerênciar)\t\t(3) = deslogar");
+					"\t\t\t\t\t\nMENU de Acesso Especial\n\n-- (1) = Entrar como Cliente (Conta Particular)\t\t(2) = Entrar do Menu Banco (Gerênciar)\t\t(3) = deslogar");
 			int op = scan.nextInt();
 			switch (op) {
 			case 1:
@@ -35,8 +36,9 @@ class SistemaInterno {
 				break;
 			case 2:
 				if (usuario instanceof Gerente) {
-					Gerente g = (Gerente) usuario;
-					System.out.println("-- (1) = Número de contas cadastradas na agência\n-- (2) = Voltar");
+					Gerente g = (Gerente) usuario;	
+					System.out.println("------------------------------------------------------------------");
+					System.out.println("\n\t(1) = Número de contas cadastradas na agência\t (2) = Voltar");
 					int op2 = scan.nextInt();
 					switch (op2) {
 					case 1:
@@ -52,7 +54,10 @@ class SistemaInterno {
 					}
 				} else if (usuario instanceof Diretor) {
 					Diretor d = (Diretor) usuario;
-					System.out.println("-- (1) = Contas cadastradas no Banco\n-- (2) = Voltar");
+					System.out.println("----------------------------------------------------------------------------------------");
+					System.out.println("-- (1) = Contas cadastradas no Banco\t\t (2) = Voltar");
+					System.out.println("----------------------------------------------------------------------------------------");
+					System.out.print(": ");
 					int op2 = scan.nextInt();
 					switch (op2) {
 					case 1:
@@ -61,12 +66,14 @@ class SistemaInterno {
 						} catch (IOException e) {
 							System.out.println(e.getMessage());
 						}
+						break;
 					case 2:
 						escolheOpcao(usuario, OpcoesMenu.INICIO, tipo);
 						break;
 					}
 				} else if (usuario instanceof Presidente) {
 					Presidente p = (Presidente) usuario;
+					System.out.println("------------------------------------------------------------------");
 					System.out.println(
 							"-- (1) = Contas cadastradas no banco\t(2) = Capital armazenado do Banco\t(3) = Voltar");
 					int op2 = scan.nextInt();
@@ -77,6 +84,7 @@ class SistemaInterno {
 						} catch (IOException e) {
 							System.out.println(e.getMessage());
 						}
+						break;
 					case 2:
 						try {
 							p.relatorioTotalCapitalDoBanco();
@@ -87,6 +95,9 @@ class SistemaInterno {
 					case 3:
 						escolheOpcao(usuario, OpcoesMenu.INICIO, tipo);
 						break;
+					default:
+						System.out.println("Opção inválida!");
+						escolheOpcao(usuario, OpcoesMenu.INICIO, tipo);
 					}
 				}
 				escolheOpcao(usuario, OpcoesMenu.INICIO, tipo);
@@ -147,7 +158,14 @@ class SistemaInterno {
 				if (usuario.getSeguroDeVida() == null) {
 					System.out.print("Digite o quantia a ser recebida em caso de falecimento, valor contratado = R$ ");
 					int val_seg = scan.nextInt();
-					usuario.contrataSeguroDeVida(val_seg);
+					double seguro = val_seg * 0.2;
+					
+					if(usuario.getConta().getSaldo() >= seguro) { usuario.contrataSeguroDeVida(val_seg); 
+					usuario.getConta().setSaldo(usuario.getConta().getSaldo()-seguro); 
+					System.out.println("Seguro Contratado!"); }
+					
+					else { System.out.println("Você não tem saldo suficiente para contratar o seguro no valor desejado!"); }
+					
 				} else {
 					System.out.printf("Você já possui um seguro de vida, o valor assegurado é de R$%.2f",
 							usuario.getSeguroDeVida().getValor());

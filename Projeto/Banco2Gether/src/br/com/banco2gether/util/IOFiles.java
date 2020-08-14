@@ -105,7 +105,7 @@ public final class IOFiles {
 		BufferedWriter buffWrite = new BufferedWriter(
 				new FileWriter(PATH_RELATORIOS + criarArquivo(Cargos.PRESIDENTE)));
 
-		buffWrite.append("Atualmente o capital do banco2Gether ï¿½: " + total);
+		buffWrite.append("Atualmente o capital do banco2Gether é " + total);
 		buffWrite.close();
 
 		return total;
@@ -141,7 +141,12 @@ public final class IOFiles {
 			TipoOperacao operacao) throws IOException {
 
 		String path = PATH_RELATORIOS + "OperacaoBancaria" + FILE_EXTENSION_CSV;
-
+		
+		File f = new File(path);
+		if (!f.exists()) {
+			f.createNewFile();
+		}
+		
 		BufferedReader buffRead = new BufferedReader(new FileReader(path));
 		BufferedWriter buffWrite = new BufferedWriter(new FileWriter(path, true));
 

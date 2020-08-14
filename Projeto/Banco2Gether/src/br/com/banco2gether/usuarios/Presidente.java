@@ -22,7 +22,7 @@ public class Presidente extends Funcionario implements IRelatorioDiretoria, IRel
 	@Override
 	public void autenticar(String cpf, String senha) {
 		if (!this.getCpf().equals(cpf) || !this.getSenha().equals(senha)) {
-			throw new ErrosLoginException("Login ou senha inv√°lidos");
+			throw new ErrosLoginException("Login ou senha inv·lidos");
 		}
 	}
 
@@ -38,14 +38,14 @@ public class Presidente extends Funcionario implements IRelatorioDiretoria, IRel
 	}
 
 	@Override
-	public double relatorioTotalCapitalDoBanco() throws IOException {
+	public void relatorioTotalCapitalDoBanco() throws IOException {
 		try {
-			return IOFiles.leituraDeCapitalDoBanco();
+			double total = IOFiles.leituraDeCapitalDoBanco();
+			System.out.printf("Atualmente o capital do banco2Gether È R$%.2f\n\n", total);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return 0;
 	}
 
 }

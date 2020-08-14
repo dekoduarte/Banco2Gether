@@ -8,9 +8,8 @@ public class SeguroDeVida implements Tributavel {
 	private double valor;
 	private final double tributoSeguroDeVida = 0.2;
 	
-	public SeguroDeVida(double valor) {
-		this.valor = valor;
-		
+	public SeguroDeVida(double valor) {	
+		this.valor = valor;		
 	}
 	
 	@Override
