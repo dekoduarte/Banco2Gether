@@ -85,12 +85,6 @@ public final class IOFiles {
 	public static double leituraDeCapitalDoBanco() throws IOException {
 
 		String path = PATH_RELATORIOS + "OperacaoBancaria" + FILE_EXTENSION_CSV;
-		
-		File f = new File(path);
-		if (!f.exists()) {
-			f.createNewFile();
-		}  
-		
 		BufferedReader buffRead = new BufferedReader(new FileReader(path));
 
 		String row;
@@ -116,12 +110,6 @@ public final class IOFiles {
 
 	public static void escreveRelatorioContasPorAgencia(int total, Cargos cargo) throws IOException {
 		String path = PATH_RELATORIOS + criarArquivo(cargo);
-		
-		File f = new File(path);
-		if (!f.exists()) {
-			f.createNewFile();
-		}  
-		
 		BufferedWriter buffWrite = new BufferedWriter(new FileWriter(path));
 		StringBuilder linha = new StringBuilder();
 
@@ -130,15 +118,7 @@ public final class IOFiles {
 	}
 	
 	public static void escreveRelatorioClientesDoBanco(Cargos cargo) throws IOException {
-		
-		
 		String path = PATH_RELATORIOS + criarArquivo(cargo);
-		
-		File f = new File(path);
-		if (!f.exists()) {
-			f.createNewFile();
-		}  
-		
 		BufferedWriter buffWrite = new BufferedWriter(new FileWriter(path));
 		StringBuilder linha = new StringBuilder();
 
