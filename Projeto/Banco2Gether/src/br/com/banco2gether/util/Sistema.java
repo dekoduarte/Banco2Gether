@@ -46,10 +46,6 @@ public final class Sistema {
 		return (Usuario) tabelaUsuario.stream().filter(u -> numero_conta == u.getConta().getNumConta()).findFirst().orElse(null);
 	}
 
-	public static Usuario buscaUsuario(int numero_conta) {
-		return (Usuario) tabelaUsuario.stream().filter(u -> numero_conta == u.getConta().getNumConta()).findFirst().orElse(null);
-	}
-
 	public static double relatorioDeTributacao(Tributavel obj) {
 		return obj.getValorImposto();
 	}

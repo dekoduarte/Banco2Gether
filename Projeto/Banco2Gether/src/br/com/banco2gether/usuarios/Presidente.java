@@ -38,7 +38,7 @@ public class Presidente extends Funcionario implements IRelatorioDiretoria, IRel
 	}
 
 	@Override
-	public double relatorioTotalCapitalDoBanco() {
+	public double relatorioTotalCapitalDoBanco() throws IOException {
 		try {
 			return IOFiles.leituraDeCapitalDoBanco();
 		} catch (IOException e) {
