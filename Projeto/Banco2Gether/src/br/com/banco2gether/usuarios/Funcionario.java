@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 import br.com.banco2gether.util.DadosPopulados;
 import br.com.banco2gether.util.IOFiles;
 import br.com.banco2gether.util.ListaModeloGeral;
+import br.com.banco2gether.util.Sistema;
 
 public abstract class Funcionario extends Usuario implements Autenticavel {
 
@@ -14,13 +15,13 @@ public abstract class Funcionario extends Usuario implements Autenticavel {
 	int numero_agencia;
 
 	public void relatorioContasPorAgencia(int agencia) throws IOException {
-		DadosPopulados dados = new DadosPopulados();
 		
-		Predicate<ListaModeloGeral> contas = x -> x.numero_agencia == agencia;
+		Predicate<Usuario> contas = x -> x.getConta().getAgencia() == agencia;
 
 		AtomicInteger total_agencia = new AtomicInteger(0);
 
-		dados.getLista().stream().filter(contas).forEach(c -> total_agencia.incrementAndGet());
+		Sistema.tabelaUsuario.stream()
+		.filter(contas).forEach(c -> total_agencia.incrementAndGet());
 		
 		System.out.println("Existem atualmente " + total_agencia.intValue() + " clientes na sua agencia. \n");
 		

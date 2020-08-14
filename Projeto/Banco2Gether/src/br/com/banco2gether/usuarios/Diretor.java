@@ -8,6 +8,7 @@ import br.com.banco2gether.usuarios.exception.ErrosLoginException;
 import br.com.banco2gether.util.DadosPopulados;
 import br.com.banco2gether.util.IOFiles;
 import br.com.banco2gether.util.ListaModeloGeral;
+import br.com.banco2gether.util.Sistema;
 
 public class Diretor extends Funcionario implements IRelatorioDiretoria {
 
@@ -27,12 +28,12 @@ public class Diretor extends Funcionario implements IRelatorioDiretoria {
 
 	@Override
 	public void relatorioClientesDoBanco() throws IOException {
-		DadosPopulados dados = new DadosPopulados();
+	
 		
-		List<ListaModeloGeral> lista = dados.getLista();
+		List<Usuario> lista = Sistema.tabelaUsuario;
 		
 		lista.stream()
-		.map(c -> "Nome: " + c.nome + ", CPF: " + c.cpf + ", Agencia: " + c.numero_agencia )
+		.map(c -> "Nome: " + c.getNome() + ", CPF: " + c.getCpf() + ", Agencia: " + c.getConta().getAgencia() )
 		.forEach(System.out::println);
 		
 		IOFiles.escreveRelatorioClientesDoBanco(Cargos.Diretor);

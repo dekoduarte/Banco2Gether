@@ -1,5 +1,8 @@
 package br.com.banco2gether.util;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -12,15 +15,16 @@ public class DadosPopulados {
 
 	private List<ListaModeloGeral> lista = new ArrayList<ListaModeloGeral>();
 
-	public List<ListaModeloGeral> getLista() {
+	public DadosPopulados() {
+		this.lista = listaDeUsuariosStatico();
+		//this.lista = listaDeUsuariosDoArquivo();
+	}
+	
+	public List<ListaModeloGeral> getLista() throws IOException  {
 		return lista;
 	}
 
-	public DadosPopulados() {
-		this.lista = listaDeUsuarios();
-	}
-
-	private List<ListaModeloGeral> listaDeUsuarios() {
+	private List<ListaModeloGeral> listaDeUsuariosStatico() {
 		List<ListaModeloGeral> lista = new ArrayList<>();
 
 		ListaModeloGeral usuario1 = new ListaModeloGeral("Felipe", "0000", "1234", "cliente", "cc", 1, 2000.00, 1);
@@ -37,14 +41,25 @@ public class DadosPopulados {
 
 		return lista;
 	}
+	
+	public static List<ListaModeloGeral> listaDeUsuariosDoArquivo() throws IOException {
 
-	private List<Conta> listaDeContas() {
-		Conta contaCorrente = new ContaCorrente();
-		Conta contaPoupanca = new ContaPoupanca();
+		String linha;
+		String path = IOFiles.PATH_RELATORIOS + "Usuario" + IOFiles.FILE_EXTENSION_CSV;
+		List<ListaModeloGeral> lista = new ArrayList<>();
+		BufferedReader csvReader = new BufferedReader(new FileReader(path));
+		linha = csvReader.readLine();
 
-		List<Conta> lista = Arrays.asList(contaCorrente, contaPoupanca);
+		while ((linha = csvReader.readLine()) != null) {
+			String[] data = linha.split(",");
+
+			lista.add(new ListaModeloGeral(data[0], data[1], data[2], data[3], data[4], Integer.parseInt(data[5]),
+					Double.parseDouble(data[6]), Integer.parseInt(data[7])));
+		}
+
+		csvReader.close();
 
 		return lista;
-	}
 
+	}
 }
