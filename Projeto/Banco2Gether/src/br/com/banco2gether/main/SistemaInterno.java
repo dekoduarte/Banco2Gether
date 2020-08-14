@@ -38,7 +38,7 @@ class SistemaInterno {
 				if (usuario instanceof Gerente) {
 					Gerente g = (Gerente) usuario;	
 					System.out.println("------------------------------------------------------------------");
-					System.out.println("\n\t(1) = Número de contas cadastradas na agência\t (2) = Voltar");
+					System.out.println("\n\t(1) = Número de contas cadastradas na agência\t(2) Criar conta\t (3) = Voltar");
 					int op2 = scan.nextInt();
 					switch (op2) {
 					case 1:
@@ -49,6 +49,33 @@ class SistemaInterno {
 						}
 						break;
 					case 2:
+						TipoContas tipoC;
+					
+						System.out.print("Nome do titular: ");
+						String nome = scan.next();
+						System.out.print("Senha para acesso: ");
+						String senha = scan.next();
+						System.out.print("CPF do titular: ");
+						String cpf = scan.next();	
+						System.out.print("Número da conta: ");
+						int num_conta = scan.nextInt();						
+						System.out.print("Tipo da conta [use: cc = Conta Corrente / cp = Conta Poupança ]: ");
+						String tipo_conta = scan.next();
+						
+						if(tipo_conta== "cc") {
+							tipoC = TipoContas.CORRENTE;
+						}
+						else { tipoC = TipoContas.POUPANCA; }	
+						
+						System.out.print("agencia:");
+						int ag = scan.nextInt();
+						try {
+							g.CriaConta(nome, cpf, senha, num_conta, tipoC, ag);
+							System.out.println("Conta criada com sucesso!");
+						}
+						catch(RuntimeException e) { System.out.println(e.getMessage()); }
+						break;
+					case 3:
 						escolheOpcao(usuario, OpcoesMenu.INICIO, tipo);
 						break;
 					}
@@ -223,6 +250,7 @@ class SistemaInterno {
 			if (usuarioLogado != null) {
 				if (usuarioLogado instanceof Cliente) {
 					Cliente cliente = (Cliente) usuarioLogado;
+					System.out.println("----------------------------------------------------------------------------------------");
 					System.out.println("\nTITULAR: " + cliente.getNome().toUpperCase() + " | CONTA "
 							+ cliente.getConta().getTipo_conta() + " - NÚMERO: " + cliente.getConta().getNumConta()
 							+ " - AGÊNCIA: " + cliente.getConta().getAgencia() + " |");

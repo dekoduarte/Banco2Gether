@@ -16,8 +16,8 @@ public class DadosPopulados {
 	private List<ListaModeloGeral> lista = new ArrayList<ListaModeloGeral>();
 
 	public DadosPopulados() {
-		// this.lista = listaDeUsuariosStatico();
-		this.lista = listaDeUsuariosDoArquivo();
+		this.lista = listaDeUsuariosStatico();
+		//this.lista = listaDeUsuariosDoArquivo();
 	}
 
 	public List<ListaModeloGeral> getLista() throws IOException {
@@ -59,7 +59,6 @@ public class DadosPopulados {
 						Double.parseDouble(data[6]), Integer.parseInt(data[7])));
 
 			}
-
 			csvReader.close();
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
