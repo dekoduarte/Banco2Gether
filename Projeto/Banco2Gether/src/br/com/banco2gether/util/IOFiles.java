@@ -23,7 +23,7 @@ public final class IOFiles {
 	public static final String PATH_RELATORIOS = "../Banco2Gether/src/br/com/banco2gether/arquivos/";
 	public static final String CABECALHO_OPERACOES_BANCARIAS = "OPERACAO,TITULAR,VALOR,IMPOSTO,DATA";
 	public static final String FILE_EXTENSION_CSV = ".csv";
-	public static final String FILE_EXTENSION_TXT = System.getProperty("os.name").indexOf("win") >= 0 ? ".txt"
+	public static final String FILE_EXTENSION_TXT = System.getProperty("os.name").toLowerCase().indexOf("win") >= 0 ? ".txt"
 			: ".text";
 
 	public static String abrirCaminhoDoArquivo() {
@@ -52,10 +52,10 @@ public final class IOFiles {
 
 	public static String criarArquivo(Cargos cargo) throws IOException {
 
-		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+		SimpleDateFormat formatter = new SimpleDateFormat("yyMMddHHmmssZ");
 		Date date = new Date();
-		File file = new File(cargo.toString().trim() + formatter.format(date).trim() + FILE_EXTENSION_TXT);
-
+		File file = new File(PATH_RELATORIOS+cargo.toString().trim() + formatter.format(date).trim() + FILE_EXTENSION_TXT);
+			
 		if (file.createNewFile()) {
 			return file.getName();
 		} else
@@ -104,7 +104,7 @@ public final class IOFiles {
 		BufferedWriter buffWrite = new BufferedWriter(
 				new FileWriter(PATH_RELATORIOS + criarArquivo(Cargos.PRESIDENTE)));
 
-		buffWrite.append("Atualmente o capital do banco2Gether ï¿½: " + total);
+		buffWrite.append("Atualmente o capital do banco2Gether é: " + total);
 		buffWrite.close();
 
 		return total;
