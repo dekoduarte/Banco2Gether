@@ -7,3 +7,7 @@ Projeto/Banco2Gether/bin/.classpath
 *.prefs
 
 .classpath
+
+*.text
+
+*.class

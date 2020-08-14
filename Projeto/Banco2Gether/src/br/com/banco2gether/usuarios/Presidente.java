@@ -1,6 +1,7 @@
 package br.com.banco2gether.usuarios;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 
 import br.com.banco2gether.relatorios.IRelatorioDiretoria;
@@ -30,10 +31,11 @@ public class Presidente extends Funcionario implements IRelatorioDiretoria, IRel
 
 		List<Usuario> lista = Sistema.tabelaUsuario;
 
-		lista.stream().map(c -> "Nome: " + c.getNome() + ", CPF: " + c.getCpf() + ", Agencia: " + c.getConta().getAgencia())
+		lista.stream().sorted(Comparator.comparing(Usuario::getNome))
+				.map(c -> "Nome: " + c.getNome() + ", CPF: " + c.getCpf() + ", Agencia: " + c.getConta().getAgencia())
 				.forEach(System.out::println);
-		
-		IOFiles.escreveRelatorioClientesDoBanco(Cargos.Diretor);
+
+		IOFiles.escreveRelatorioClientesDoBanco(Cargos.Presidente);
 	}
 
 	@Override
