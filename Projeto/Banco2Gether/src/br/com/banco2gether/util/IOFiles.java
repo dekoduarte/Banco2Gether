@@ -107,7 +107,7 @@ public final class IOFiles {
 		
 		BufferedWriter buffWrite = new BufferedWriter(new FileWriter(PATH_RELATORIOS + criarArquivo(Cargos.PRESIDENTE)));
 
-		buffWrite.append("Atualmente o capital do banco2Gether é: " + total);
+		buffWrite.append("Atualmente o capital do banco2Gether ï¿½: " + total);
 		buffWrite.close();
 
 		return total;
@@ -135,7 +135,7 @@ public final class IOFiles {
 		String path = PATH_RELATORIOS + criarArquivo(cargo);
 		
 		File f = new File(path);
-		if (!f.exists()) {
+		if (!f.exists()) { 
 			f.createNewFile();
 		}  
 		
